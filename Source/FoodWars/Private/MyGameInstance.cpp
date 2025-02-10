@@ -60,6 +60,7 @@ void UMyGameInstance::HandleControllerConnection(bool bIsConnected, FPlatformUse
             {
                 ConnectedControllers.Add(ControllerIdStr, FControllerData(PlayerIndex, ControllerIdStr));
                 UE_LOG(LogTemp, Warning, TEXT("Neuer Controller %s verbunden als Player %d"), *ControllerIdStr, PlayerIndex);
+                SetIsDebugging(true);
             }
         }
     }
@@ -98,7 +99,7 @@ void UMyGameInstance::CheckControllers()
         {
             GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Green,
                 FString::Printf(TEXT("Controller ID: %s ist verbunden"), *Pair.Key));
-            SetIsDebugging(false);
+            SetIsDebugging(true);
         }
         else
         {
@@ -112,7 +113,7 @@ void UMyGameInstance::CheckControllers()
     if (ConnectedControllers.Num() == 0)
     {
         GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Yellow, TEXT("Keine Controller registriert"));
-        SetIsDebugging(true);
+        
     }
 }
 
